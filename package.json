@@ -155,6 +155,7 @@
       "no-console": "off",
       "no-underscore-dangle": "off",
       "function-paren-newline": "off",
+      "linebreak-style": "off",
       "import/first": "off",
       "import/prefer-default-export": "off",
       "react/jsx-filename-extension": [

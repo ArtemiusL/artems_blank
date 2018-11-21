@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
 import Helmet from 'react-helmet';
 
-import Users from './Users';
+import BlankApp from '_components/BlankApp';
 
 const HomePage = () => (
   <Fragment>
     <Helmet title="Home" />
-    <Users />
+    <BlankApp />
   </Fragment>
 );
+
 
 export default HomePage;
