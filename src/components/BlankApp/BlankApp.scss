@@ -1,9 +1,7 @@
 .container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-  height: 100vh;
+  margin: 15px auto;
+  padding: 0 15px;
+  height: 125vh;
 }
 
 .site-flex {
@@ -12,9 +10,31 @@
 
 .site-title {
   font-weight: 300;
-  font-size: 30px;
+  font-size: 35px;
   text-align: center;
   margin-bottom: 30px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(240, 240, 240, 0.7);
+}
+
+.site-right {
+  width: 47.5%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.main-blank {
+  padding: 15px;
+  background-color: rgba(10, 20, 100, 0.9);
+  color: #fff;
+}
+
+.main-blank__title {
+  font-size: 23px;
+  margin-bottom: 30px;
+}
+
+.blank-flex {
+  display: flex;
+  flex-wrap: wrap;
 }
 

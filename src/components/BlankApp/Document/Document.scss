@@ -1,3 +1,24 @@
-.main-blank {
-  width: 290px;
+.main-blank-item {
+  width: 100%;
+  font-size: 20px;
+}
+
+.main-blank-item__value {
+  border-bottom: 1px solid #0b295b;
+  display: inline-block;
+  width: 250px;
+  font-size: 17px;
+  line-height: 17px;
+  min-height: 21px;
+  overflow: hidden;
+}
+
+.main-blank-item__longvalue {
+  border-bottom: 1px solid #0b295b;
+  display: flex;
+  width: 100%;
+  font-size: 17px;
+  line-height: 17px;
+  min-height: 21px;
+  overflow: auto;
 }

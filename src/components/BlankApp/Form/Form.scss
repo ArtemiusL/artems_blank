@@ -5,3 +5,97 @@
   flex-shrink: 0;
   background-color: #fff;
 }
+
+.main-form {
+  padding: 15px;
+  color: rgba(10, 30, 50, 0.9);
+  text-align: center;
+}
+
+.main-form__title {
+  margin-bottom: 30px;
+  font-size: 23px;
+  text-align: center;
+}
+
+.form-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-flex__description {
+  font-size: 10px;
+  padding-left: 170px;
+  padding-bottom: 10px;
+}
+
+.main-form-item__validation {
+  display: inline-block;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: 80px;
+  width: 450px;
+  font-size: 15px;
+  line-height: 25px;
+  color: #f54040;
+}
+
+.form-flex__item,
+.main-form-item {
+  width: 100%;
+  margin: 0% 1%;
+}
+
+.form-flex__item label {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  text-align: center;
+  font-size: 17px;
+  line-height: 20px;
+  margin-right: 20px;
+}
+
+.main-form-item label {
+  display: inline-block;
+  position: relative;
+  width: 580px;
+  text-align: center;
+  font-size: 17px;
+  line-height: 20px;
+  margin-right: 20px;
+  color: rgba(10, 30, 50, 0.9);
+}
+
+.form-flex__item input {
+  display: inline-block;
+  width: 290px;
+  padding-bottom: 10px;
+  border: none;
+  border-bottom: 1px solid rgba(10, 30, 50, 0.9);
+  font-size: 17px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.main-form-item textarea {
+  display: inline-block;
+  width: 612px;
+  height: 120px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(10, 30, 50, 0.9);
+  font-size: 17px;
+  line-height: 20px;
+}
+
+.main-form-item button {
+  display: inline-block;
+  margin-left: 190px;
+  width: 200px;
+  padding-bottom: 2px;
+  border: none;
+  border-bottom: 1px solid rgba(10, 30, 50, 0.9);
+  font-size: 17px;
+  line-height: 27px;
+  text-align: center;
+}
