@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 
 import CSSModules from 'react-css-modules';
@@ -15,6 +16,7 @@ class BlankApp extends PureComponent {
     story: '',
     fieldIsEmpty: '',
     fieldDateIsNotCorrect: '',
+    fieldEmailIsInvalid: '',
   };
 
   changeInputName = (inputName) => {
@@ -47,7 +49,7 @@ class BlankApp extends PureComponent {
     });
   }
 
-  notifyEmptyField = (textError) => {
+  notifyEmptyField = (textError, typeValue) => {
     this.setState({
       fieldIsEmpty: textError,
     });
@@ -59,6 +61,12 @@ class BlankApp extends PureComponent {
     });
   }
 
+  notifyWrongEmail = (textError) => {
+    this.setState({
+      fieldEmailIsInvalid: textError,
+    });
+  }
+
   checkIsEmpty = () => {
     const {
       name,
@@ -66,16 +74,20 @@ class BlankApp extends PureComponent {
       email,
     } = this.state;
 
-    if (name.trim().length === 0 || lastname.trim().length === 0 || email.trim().length === 0) {
-      this.notifyEmptyField('Поля "имя", "фамилия", "email" обязательны для заполнения');
+    if (name.trim().length === 0) {
+      this.notifyEmptyField('Поле "имя" обязательное для заполнения');
+    } else if (lastname.trim().length === 0) {
+      this.notifyEmptyField('Поле "фамилия" обязательное для заполнения');
+    } else if (email.trim().length === 0) {
+      this.notifyEmptyField('Поле "email" обязательное для заполнения');
     } else {
       this.notifyEmptyField('');
     }
-  };
+  }
 
-  checkIsDate = () => {
+  checkDate = () => {
     const { date } = this.state;
-    if (!/\d\d\.\d\d\.\d\d\d\d/.test(date) || date.length !== 10) {
+    if (!/\d\d\.\d\d\.\d\d\d\d/.test(date)) {
       this.notifyWrongDate('Дата введена неверно. Введите дату в формате ДД.ММ.ГГГГ');
     } else if (date.substr(1, 1) < 1 || date.substr(0, 2) > 31) {
       this.notifyWrongDate('Число введено не верно');
@@ -88,6 +100,13 @@ class BlankApp extends PureComponent {
     }
   }
 
+  checkEmail = () => {
+    const { email } = this.state;
+    if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(email)) {
+      this.notifyWrongEmail(' Неверный формат email');
+    } else this.notifyWrongEmail('');
+  }
+
   render() {
     const {
       name,
@@ -97,6 +116,7 @@ class BlankApp extends PureComponent {
       story,
       fieldIsEmpty,
       fieldDateIsNotCorrect,
+      fieldEmailIsInvalid,
     } = this.state;
 
     return (
@@ -110,9 +130,11 @@ class BlankApp extends PureComponent {
             changeInputEmail={this.changeInputEmail}
             changeTextareaStory={this.changeTextareaStory}
             checkIsEmpty={this.checkIsEmpty}
-            checkIsDate={this.checkIsDate}
+            checkDate={this.checkDate}
+            checkEmail={this.checkEmail}
             fieldIsEmpty={fieldIsEmpty}
             fieldDateIsNotCorrect={fieldDateIsNotCorrect}
+            fieldEmailIsInvalid={fieldEmailIsInvalid}
           />
           <div styleName="site-right">
             <section styleName="main-blank">

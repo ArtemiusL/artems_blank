@@ -2,14 +2,22 @@
 import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import styles from './Form.scss';
 
 @CSSModules(styles, { allowMultiple: true })
 class Form extends PureComponent {
+  checkClassName = () => {
+    const { fieldIsEmpty } = this.props;
+    return fieldIsEmpty.length !== 0;
+  };
+
   onValidateForm = () => {
     this.props.checkIsEmpty();
-    this.props.checkIsDate();
+    this.props.checkDate();
+    this.props.checkEmail();
+    this.checkClassName();
   };
 
   handleChangeName = (evt) => {
@@ -37,9 +45,9 @@ class Form extends PureComponent {
     changeTextareaStory(evt.target.value);
   };
 
-
   render() {
-    const { fieldIsEmpty, fieldDateIsNotCorrect } = this.props;
+    const { fieldIsEmpty, fieldDateIsNotCorrect, fieldEmailIsInvalid} = this.props;
+    const hasError = this.checkClassName();
     return (
       <div styleName="site-left">
         <form styleName="main-form">
@@ -47,28 +55,28 @@ class Form extends PureComponent {
           <div styleName="form-flex">
             <p styleName="form-flex__description">* обозначены обязательные для заполнения поля</p>
             <div styleName="form-flex__item">
-              <label>Введите имя *</label><br />
-              <input styleName={this.checkClass}type="text" onChange={this.handleChangeName} /><br />
+              <label htmlFor="name">Введите имя *</label><br />
+              <input styleName={classnames('input', { hasError })} type="text" name="name" onChange={this.handleChangeName} /><br />
             </div>
             <div styleName="form-flex__item">
-              <label>Введите фамилию *</label><br />
-              <input type="text" onChange={this.handleChangeLastname} /><br />
+              <label htmlFor="lastname">Введите фамилию *</label><br />
+              <input styleName={classnames('input', { hasError})} type="text" onChange={this.handleChangeLastname} /><br />
             </div>
             <div styleName="form-flex__item">
-              <label>Введите дату рождения *</label><br />
-              <input type="text" placeholder="в формате ДД.ММ.ГГ" onChange={this.handleChangeDate} /><br />
+              <label htmlFor="date">Введите дату рождения *</label><br />
+              <input styleName={classnames('input', { hasError })} type="text" placeholder="ДД.ММ.ГГГГ" onChange={this.handleChangeDate} /><br />
             </div>
             <div styleName="form-flex__item">
-              <label>Введите email *</label><br />
-              <input type="text" onChange={this.handleChangeEmail} /><br />
+              <label htmlFor="email">Введите email *</label><br />
+              <input styleName={classnames('input', { hasError })} type="text" name="email" onChange={this.handleChangeEmail} /><br />
             </div>
           </div>
         </form>
         <div styleName="main-form-item">
-          <label>Напишите о себе</label><br />
+          <label  htmlFor="story">Напишите о себе</label><br />
           <textarea name="message" onChange={this.handleChangeStory} defaultValue="" /> <br />
           <button onClick={this.onValidateForm}>Подтвердить</button>
-          <p styleName="main-form-item__validation">{fieldIsEmpty}<br />{fieldDateIsNotCorrect}</p>
+          <p styleName="main-form-item__validation">{fieldIsEmpty}<br />{fieldDateIsNotCorrect}<br />{fieldEmailIsInvalid}</p>
         </div>
       </div>
     );
@@ -82,9 +90,11 @@ Form.propTypes = {
   changeInputEmail: PropTypes.func,
   changeTextareaStory: PropTypes.func,
   checkIsEmpty: PropTypes.func,
-  checkIsDate: PropTypes.func,
+  checkDate: PropTypes.func,
+  checkEmail: PropTypes.func,
   fieldIsEmpty: PropTypes.string,
   fieldDateIsNotCorrect: PropTypes.string,
+  fieldEmailIsInvalid: PropTypes.string,
 };
 
 export default CSSModules(Form, styles);

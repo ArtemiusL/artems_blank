@@ -5,20 +5,20 @@
 
 .main-blank-item__value {
   border-bottom: 1px solid #0b295b;
-  display: inline-block;
+  display: inline;
   width: 250px;
   font-size: 17px;
   line-height: 17px;
   min-height: 21px;
-  overflow: hidden;
+  word-wrap: break-word;
 }
 
 .main-blank-item__longvalue {
   border-bottom: 1px solid #0b295b;
-  display: flex;
+  display: inline;
   width: 100%;
   font-size: 17px;
   line-height: 17px;
   min-height: 21px;
-  overflow: auto;
+  word-wrap: break-word;
 }
