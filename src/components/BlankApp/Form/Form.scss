@@ -25,36 +25,35 @@
 }
 
 .form-flex__description {
-  font-size: 12px;
-  padding-left: 160px;
+  font-size: 14px;
+  padding-left: 170px;
   padding-bottom: 10px;
 }
 
 .main-form-item,
 .form-flex__item {
   width: 100%;
-  margin: 0% 1%;
+  margin: 0 22px 20px 22px;
 }
 
 .main-form-item label {
   display: inline-block;
   position: relative;
-  width: 580px;
+  width: 655px;
   text-align: center;
   font-size: 17px;
   line-height: 20px;
-  margin-right: 20px;
   color: rgba(10, 30, 50, 0.9);
 }
 
 .main-form-item textarea {
   display: inline-block;
-  width: 612px;
-  height: 120px;
+  width: 655px;
+  height: 150px;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(10, 30, 50, 0.9);
   font-size: 17px;
   line-height: 20px;
+  resize: none;
 }
 
 .main-form-item button {

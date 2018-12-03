@@ -15,14 +15,14 @@
 .form-flex__item label {
   display: inline-block;
   position: relative;
-  width: 200px;
+  width: 100%;
   text-align: center;
   font-size: 17px;
-  line-height: 20px;
+  line-height: 30px;
   margin-right: 20px;
 }
 
-.form-flex__item input {
+.input {
   display: inline-block;
   width: 290px;
   padding-bottom: 2px;
@@ -31,5 +31,9 @@
   font-size: 17px;
   line-height: 20px;
   text-align: center;
-}
+  border-color: black;
 
+  &.hasError {
+    border-color: red;
+  }
+}
