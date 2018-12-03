@@ -25,7 +25,7 @@ class FieldForm extends PureComponent {
     } = this.props;
     const hasError = this.checkClassName();
     return (
-      <div styleName="form-flex__item">
+      <div styleName="root">
         <label htmlFor={fieldName}>{label}<br />
           <input
             id={fieldName}

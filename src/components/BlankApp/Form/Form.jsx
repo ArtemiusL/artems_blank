@@ -27,11 +27,11 @@ class Form extends PureComponent {
       changeInput,
     } = this.props;
     return (
-      <div styleName="site-left">
-        <form styleName="main-form">
-          <h3 styleName="main-form__title"> Введите информацию о себе </h3>
-          <div styleName="form-flex">
-            <p styleName="form-flex__description">* обозначены обязательные для заполнения поля</p>
+      <div styleName="root">
+        <form styleName="form">
+          <h3 styleName="title"> Введите информацию о себе </h3>
+          <div styleName="formFlex">
+            <p styleName="description">*поля, обязательные для заполнения</p>
             <FieldForm
               label="Введите имя*"
               fieldName="name"
@@ -67,9 +67,9 @@ class Form extends PureComponent {
             /> <br />
           </div>
         </form>
-        <div styleName="main-form-item">
+        <div styleName="item">
           <label htmlFor="story">Напишите о себе<br />
-            <textarea id="story" name="message" onChange={this.handleChangeStory} defaultValue="" /> <br />
+            <textarea id="story" name="message" maxLength="1500" onChange={this.handleChangeStory} defaultValue="" placeholder="Максимальное количество символом - 1500" /> <br />
           </label>
         </div>
       </div>

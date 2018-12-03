@@ -15,12 +15,15 @@ class Document extends PureComponent {
       story,
     } = this.props;
     return (
-      <div styleName="main-blank-item">
-        Здравствуйте, меня зовут <p styleName="main-blank-item__value">{lastname} {name}</p><br />
-        Хочу пройти у вас стажировку! <br />
-        Дата рождения <p styleName="main-blank-item__value">{date}</p> <br />
-        Мой email: <p styleName="main-blank-item__value">{email}</p> <br />
-        О себе: <p styleName="main-blank-item__longvalue">{story}</p> <br />
+      <div styleName="root">
+        <h2 styleName="title">Ваша заявка</h2>
+        <div styleName="blank">
+          Здравствуйте, меня зовут <p styleName="value">{lastname} {name}</p><br />
+          Хочу пройти у вас стажировку! <br />
+          Дата рождения <p styleName="value">{date}</p> <br />
+          Мой email: <p styleName="value">{email}</p> <br />
+          О себе: <p styleName="longValue">{story}</p> <br />
+        </div>
       </div>
     );
   }

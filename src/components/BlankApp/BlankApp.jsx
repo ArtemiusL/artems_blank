@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-
 import CSSModules from 'react-css-modules';
 
 import styles from './BlankApp.scss';
@@ -23,7 +22,6 @@ class BlankApp extends PureComponent {
     nameValid: false,
     lastnameValid: false,
     dateValid: false,
-    formValid: false,
   };
 
   changeTextareaStory = (textareaStory) => {
@@ -56,7 +54,7 @@ class BlankApp extends PureComponent {
         formErrors.lastname = lastnameValid ? 'Поле "фамилия" должно быть заполнено' : '';
         break;
       case 'date':
-        if (!/([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})/.test(value.trim())) {
+        if (!/([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})$/.test(value.trim())) {
           dateValid = true;
           formErrors.date = 'Дата введена неверно. Введите дату в формате ДД.ММ.ГГГГ';
         } else {
@@ -83,16 +81,6 @@ class BlankApp extends PureComponent {
       nameValid,
       lastnameValid,
       dateValid,
-    }, this.validateForm);
-  }
-
-  validateForm = () => {
-    this.setState({
-      formValid:
-      this.state.emailValid &&
-      this.state.nameValid &&
-      this.state.lastnameValid &&
-      this.state.dateValid,
     });
   }
 
@@ -103,17 +91,17 @@ class BlankApp extends PureComponent {
       date,
       email,
       story,
-      formValid,
       formErrors,
       dateValid,
       nameValid,
       lastnameValid,
       emailValid,
+      styleName,
     } = this.state;
     return (
-      <div styleName="container">
-        <h1 styleName="site-title">Заявка на стажировку</h1>
-        <div styleName="site-flex">
+      <div className={styleName} styleName="root">
+        <h1 styleName="title">Заявка на стажировку</h1>
+        <div styleName="site">
           <Form
             lastname={lastname}
             name={name}
@@ -121,26 +109,20 @@ class BlankApp extends PureComponent {
             email={email}
             changeInput={this.updateInput}
             changeTextareaStory={this.changeTextareaStory}
-            isValidateForm={formValid}
             formErrors={formErrors}
             emailValid={emailValid}
             lastnameValid={lastnameValid}
             nameValid={nameValid}
             dateValid={dateValid}
           />
-          <div styleName="site-right">
-            <section styleName="main-blank">
-              <h2 styleName="main-blank__title">Ваша заявка</h2>
-              <div styleName="blank-flex">
-                <Document
-                  name={name}
-                  lastname={lastname}
-                  date={date}
-                  email={email}
-                  story={story}
-                />
-              </div>
-            </section>
+          <div styleName="right">
+            <Document
+              name={name}
+              lastname={lastname}
+              date={date}
+              email={email}
+              story={story}
+            />
           </div>
         </div>
       </div>

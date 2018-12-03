@@ -8,7 +8,7 @@ import BlankApp from '_components/BlankApp';
 const HomePage = () => (
   <Fragment>
     <Helmet title="Home" />
-    <BlankApp />
+    <BlankApp styleName="container" />
   </Fragment>
 );
 
