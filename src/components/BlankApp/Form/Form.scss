@@ -1,83 +1,60 @@
-.site-left {
+@import '~styles/variables';
+
+.root {
   width: 47.5%;
   height: 100%;
   margin-right: 5%;
   flex-shrink: 0;
-  background-color: #fff;
+  background-color: $color-white;
 }
 
-.main-form {
+.form {
   padding: 15px;
   color: rgba(10, 30, 50, 0.9);
   text-align: center;
 }
 
-.main-form__title {
+.title {
   margin-bottom: 30px;
   font-size: 23px;
   text-align: center;
 }
 
-.form-flex {
+.formFlex {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
 }
 
-.form-flex__description {
+.description {
   font-size: 14px;
-  padding-left: 170px;
-  padding-bottom: 10px;
-}
-
-.main-form-item,
-.form-flex__item {
   width: 100%;
-  margin: 0 22px 20px 22px;
-}
-
-.main-form-item label {
-  display: inline-block;
-  position: relative;
-  width: 655px;
-  text-align: center;
-  font-size: 17px;
-  line-height: 20px;
-  color: rgba(10, 30, 50, 0.9);
-}
-
-.main-form-item textarea {
-  display: inline-block;
-  width: 655px;
-  height: 150px;
   padding-bottom: 10px;
-  font-size: 17px;
-  line-height: 20px;
-  resize: none;
 }
 
-.main-form-item button {
-  display: inline-block;
-  margin-left: 190px;
-  width: 200px;
-  padding-bottom: 2px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 17px;
-  line-height: 27px;
-  text-align: center;
-  color: rgba(10, 30, 50, 0.9);
-}
+.item {
+  width: 100%;
+  padding: 0 22px 20px 22px;
 
-.main-form-item button:hover {
-  border: 1px solid rgb(198, 198, 198);
-  color: rgb(24, 24, 24);
-  background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
+  label {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 20px;
+    color: rgba(10, 30, 50, 0.9);
+  }
 
-.main-form-item button:active {
-  color: rgb(51, 51, 51);
-  border: 1px solid rgb(204, 204, 204);
-  background: rgb(238, 238, 238) linear-gradient(rgb(238, 238, 238), rgb(224, 224, 224));
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  textarea {
+    display: inline-block;
+    width: 100%;
+    height: 150px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    font-size: 17px;
+    line-height: 20px;
+    resize: none;
+  }
 }

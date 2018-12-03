@@ -1,10 +1,23 @@
-.main-blank-item {
+@import '~styles/variables';
+
+.root {
+  padding: 15px;
+  background-color: rgba(10, 80, 100, 0.9);
+  color: $color-white;
+}
+
+.title {
+  font-size: 23px;
+  margin-bottom: 30px;
+}
+
+.blank {
   width: 100%;
   font-size: 20px;
 }
 
-.main-blank-item__value {
-  border-bottom: 1px solid #0b295b;
+.value {
+  border-bottom: 1px solid $color-sapphire;
   display: inline;
   width: 250px;
   font-size: 21px;
@@ -13,8 +26,8 @@
   word-wrap: break-word;
 }
 
-.main-blank-item__longvalue {
-  border-bottom: 1px solid #0b295b;
+.longValue {
+  border-bottom: 1px solid $color-sapphire;
   display: inline;
   width: 100%;
   font-size: 21px;
