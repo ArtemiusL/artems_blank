@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 
 import styles from './BlankApp.scss';
-import Form from '_components/BlankApp/Form';
-import Document from '_components/BlankApp/Document';
+import Form from './Form';
+import Document from './Document';
 
 class BlankApp extends PureComponent {
   state = {
@@ -13,7 +13,6 @@ class BlankApp extends PureComponent {
     date: '',
     email: '',
     story: '',
-    fieldIsEmpty: '',
     formErrors: {
       email: '',
       name: '',
@@ -33,7 +32,7 @@ class BlankApp extends PureComponent {
     });
   }
 
-  updateInputName = ({ target: { name, value } }) => {
+  updateInput = ({ target: { name, value } }) => {
     this.setState({ [name]: value },
       () => { this.validateField(name, value); },
     );
@@ -48,21 +47,31 @@ class BlankApp extends PureComponent {
       dateValid,
     } = this.state;
     switch (fieldName) {
-      case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        formErrors.email = emailValid ? '' : ' Неправильный формат еmail';
-        break;
       case 'name':
-        nameValid = value.trim().length > 0;
-        formErrors.name = nameValid ? '' : ' Поле "имя" должно быть заполнено';
+        nameValid = value.trim().length === 0;
+        formErrors.name = nameValid ? ' Поле "имя" должно быть заполнено' : '';
         break;
       case 'lastname':
-        lastnameValid = value.length > 0;
-        formErrors.lastname = lastnameValid ? '' : 'Поле "фамилия" должно быть заполнено';
+        lastnameValid = value.trim().length === 0;
+        formErrors.lastname = lastnameValid ? 'Поле "фамилия" должно быть заполнено' : '';
         break;
       case 'date':
-        dateValid = /\d\d\.\d\d\.\d\d\d\d/.test(value);
-        formErrors.date = dateValid ? '' : 'Дата введена неверно. Введите дату в формате ДД.ММ.ГГГГ';
+        if (!/([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})/.test(value.trim())) {
+          dateValid = true;
+          formErrors.date = 'Дата введена неверно. Введите дату в формате ДД.ММ.ГГГГ';
+        } else {
+          dateValid = false;
+          formErrors.date = '';
+        }
+        break;
+      case 'email':
+        if (!(/([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value.trim())) {
+          emailValid = true;
+          formErrors.email = ' Неправильный формат еmail';
+        } else {
+          emailValid = false;
+          formErrors.email = '';
+        }
         break;
       default:
         break;
@@ -86,13 +95,6 @@ class BlankApp extends PureComponent {
       this.state.dateValid,
     });
   }
-  /*
-  notifyEmptyField = (field, textError) => {
-    this.setState({
-      [field]: { err: textError },
-    });
-  }
-  */
 
   render() {
     const {
@@ -101,9 +103,12 @@ class BlankApp extends PureComponent {
       date,
       email,
       story,
-      fieldIsEmpty,
       formValid,
       formErrors,
+      dateValid,
+      nameValid,
+      lastnameValid,
+      emailValid,
     } = this.state;
     return (
       <div styleName="container">
@@ -114,13 +119,14 @@ class BlankApp extends PureComponent {
             name={name}
             date={date}
             email={email}
-            fieldIsEmpty={fieldIsEmpty}
-            changeInputName={this.updateInputName}
+            changeInput={this.updateInput}
             changeTextareaStory={this.changeTextareaStory}
-            handleEmptyField={this.notifyEmptyField}
             isValidateForm={formValid}
-            validateField={this.validateField}
             formErrors={formErrors}
+            emailValid={emailValid}
+            lastnameValid={lastnameValid}
+            nameValid={nameValid}
+            dateValid={dateValid}
           />
           <div styleName="site-right">
             <section styleName="main-blank">

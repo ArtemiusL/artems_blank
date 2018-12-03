@@ -1,10 +1,10 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 
 import PropTypes from 'prop-types';
 import styles from './Document.scss';
 
+@CSSModules(styles, { allowMultiple: true })
 class Document extends PureComponent {
   render() {
     const {
@@ -34,4 +34,4 @@ Document.propTypes = {
   story: PropTypes.string,
 };
 
-export default CSSModules(Document, styles);
+export default Document;

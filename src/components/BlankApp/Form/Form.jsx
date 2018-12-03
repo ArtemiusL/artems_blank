@@ -1,31 +1,13 @@
-/* eslint-disable */
+
 import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
 
 import styles from './Form.scss';
-import FieldForm from '_components/BlankApp/Form/FieldForm';
+import FieldForm from './FieldForm';
 
 @CSSModules(styles, { allowMultiple: true })
 class Form extends PureComponent {
-/*
-   onValidateForm = () => {
-    this.checkIsEmpty();
-  };
-
-  notifyEmptyField = (textError) => {
-    this.props.handleEmptyField('lastname', textError);
-  }
-
-  checkIsEmpty = () => {
-    const { lastname } = this.props;
-    if (lastname.trim().length === 0) {
-      this.notifyEmptyField('Поле обязательно для заполнения');
-    } else {
-      this.notifyEmptyField('');
-    }
-  }
-*/
   handleChangeStory = (evt) => {
     const { changeTextareaStory } = this.props;
     changeTextareaStory(evt.target.value);
@@ -37,10 +19,12 @@ class Form extends PureComponent {
       lastname,
       date,
       email,
-      changeInputName,
-      fieldIsEmpty,
-      isValidateForm,
       formErrors,
+      nameValid,
+      lastnameValid,
+      emailValid,
+      dateValid,
+      changeInput,
     } = this.props;
     return (
       <div styleName="site-left">
@@ -49,48 +33,44 @@ class Form extends PureComponent {
           <div styleName="form-flex">
             <p styleName="form-flex__description">* обозначены обязательные для заполнения поля</p>
             <FieldForm
-              label="Введите имя *"
+              label="Введите имя*"
               fieldName="name"
               data={name}
-              handleChangeInput={changeInputName}
-              fieldIsEmpty={fieldIsEmpty}
+              handleChangeInput={changeInput}
               formErrors={formErrors}
+              fieldValid={nameValid}
             /> <br />
             <FieldForm
-              label="Введите фамилию *"
+              label="Введите фамилию*"
               fieldName="lastname"
               data={lastname}
-              handleChangeInput={changeInputName}
-              fieldIsEmpty={fieldIsEmpty}
+              handleChangeInput={changeInput}
               formErrors={formErrors}
+              fieldValid={lastnameValid}
             /> <br />
             <FieldForm
-              label="Введите дату рождения "
+              label="Введите дату рождения*"
               fieldName="date"
               data={date}
-              handleChangeInput={changeInputName}
+              handleChangeInput={changeInput}
               placeholder="ДД.ММ.ГГГГ"
-              fieldIsEmpty={fieldIsEmpty}
               formErrors={formErrors}
+              fieldValid={dateValid}
             /> <br />
             <FieldForm
-              label="Введите email *"
+              label="Введите email*"
               fieldName="email"
               data={email}
-              handleChangeInput={changeInputName}
-              fieldIsEmpty={fieldIsEmpty}
+              handleChangeInput={changeInput}
               formErrors={formErrors}
+              fieldValid={emailValid}
             /> <br />
           </div>
         </form>
         <div styleName="main-form-item">
-          <label>Напишите о себе</label><br />
-          <textarea name="message" onChange={this.handleChangeStory} defaultValue="" /> <br />
-          <button
-            disabled={!(isValidateForm)}
-            onClick={this.props.validateField}
-          >Подтвердить
-          </button>
+          <label htmlFor="story">Напишите о себе<br />
+            <textarea id="story" name="message" onChange={this.handleChangeStory} defaultValue="" /> <br />
+          </label>
         </div>
       </div>
     );
@@ -102,13 +82,13 @@ Form.propTypes = {
   lastname: PropTypes.string,
   date: PropTypes.string,
   email: PropTypes.string,
-  changeInputName: PropTypes.func,
+  changeInput: PropTypes.func,
   changeTextareaStory: PropTypes.func,
-  fieldIsEmpty: PropTypes.string,
-  /*handleEmptyField: PropTypes.func,*/
-  isValidateForm: PropTypes.bool,
   formErrors: PropTypes.object,
-  validateField: PropTypes.func,
+  nameValid: PropTypes.bool,
+  lastnameValid: PropTypes.bool,
+  dateValid: PropTypes.bool,
+  emailValid: PropTypes.bool,
 };
 
-export default CSSModules(Form, styles);
+export default Form;
