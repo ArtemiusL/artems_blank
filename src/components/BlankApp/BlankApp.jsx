@@ -1,101 +1,131 @@
 import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 
-import styles from './BlankApp.scss';
 import Form from './Form';
 import Document from './Document';
 
+import styles from './BlankApp.scss';
+
 class BlankApp extends PureComponent {
   state = {
-    name: '',
-    lastname: '',
-    date: '',
-    email: '',
-    story: '',
-    formErrors: {
-      email: '',
-      name: '',
-      lastname: '',
-      date: '',
+    fields: [
+      {
+        name: 'name',
+        value: '',
+        error: '',
+      },
+      {
+        name: 'lastname',
+        value: '',
+        error: '',
+      },
+      {
+        name: 'date',
+        value: '',
+        error: '',
+      },
+      {
+        name: 'email',
+        value: '',
+        error: '',
+      },
+    ],
+    story: {
+      value: '',
     },
-    emailValid: false,
-    nameValid: false,
-    lastnameValid: false,
-    dateValid: false,
   };
 
-  changeTextareaStory = (textareaStory) => {
+  changeStory = (valueStory) => {
+    const { story } = this.state;
     this.setState({
-      story: textareaStory,
+      story: { ...story, value: valueStory },
     });
   }
 
   updateInput = ({ target: { name, value } }) => {
-    this.setState({ [name]: value },
-      () => { this.validateField(name, value); },
+    const { fields } = this.state;
+    const getNewState = () => (
+      fields.map((item) => {
+        if (item.name === name) {
+          const newItem = { ...item, value };
+          return newItem;
+        }
+        return item;
+      })
     );
+    const newFields = getNewState();
+
+    this.setState({
+      fields: newFields,
+    });
+    this.validateField(name, value);
+  }
+
+  handleChangeFieldErr = (fieldName, value, textErr) => {
+    const { fields } = this.state;
+    const getNewState = () => (
+      fields.map((item) => {
+        if (item.name === fieldName) {
+          const newItem = { ...item, value, error: textErr };
+          return newItem;
+        }
+        return item;
+      })
+    );
+    const newFields = getNewState();
+    this.setState({
+      fields: newFields,
+    });
+  }
+
+  isEmptyField = (fieldName, value) => {
+    if (value.trim().length === 0) {
+      this.handleChangeFieldErr(fieldName, value, 'Поле должно быть заполнено!');
+    } else {
+      this.handleChangeFieldErr(fieldName, value, '');
+    }
+  }
+
+  isDateValid = (fieldName, value) => {
+    if (!/([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})$/.test(value.trim())) {
+      this.handleChangeFieldErr(fieldName, value, 'Дата введена неверно. Введите дату в формате ДД.ММ.ГГГГ!');
+    } else {
+      this.handleChangeFieldErr(fieldName, value, '');
+    }
+  }
+
+  isEmailValid = (fieldName, value) => {
+    if (!(/([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value.trim())) {
+      this.handleChangeFieldErr(fieldName, value, 'Неправильный формат еmail');
+    } else {
+      this.handleChangeFieldErr(fieldName, value, '');
+    }
   }
 
   validateField = (fieldName, value) => {
-    const { formErrors } = this.state;
-    let {
-      emailValid,
-      nameValid,
-      lastnameValid,
-      dateValid,
-    } = this.state;
     switch (fieldName) {
       case 'name':
-        nameValid = value.trim().length === 0;
-        formErrors.name = nameValid ? ' Поле "имя" должно быть заполнено' : '';
+        this.isEmptyField(fieldName, value);
         break;
       case 'lastname':
-        lastnameValid = value.trim().length === 0;
-        formErrors.lastname = lastnameValid ? 'Поле "фамилия" должно быть заполнено' : '';
+        this.isEmptyField(fieldName, value);
         break;
       case 'date':
-        if (!/([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})$/.test(value.trim())) {
-          dateValid = true;
-          formErrors.date = 'Дата введена неверно. Введите дату в формате ДД.ММ.ГГГГ';
-        } else {
-          dateValid = false;
-          formErrors.date = '';
-        }
+        this.isDateValid(fieldName, value);
         break;
       case 'email':
-        if (!(/([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value.trim())) {
-          emailValid = true;
-          formErrors.email = ' Неправильный формат еmail';
-        } else {
-          emailValid = false;
-          formErrors.email = '';
-        }
+        this.isEmailValid(fieldName, value);
         break;
       default:
         break;
     }
-
-    this.setState({
-      formErrors,
-      emailValid,
-      nameValid,
-      lastnameValid,
-      dateValid,
-    });
   }
 
   render() {
+    console.log('render blank app');
     const {
-      name,
-      lastname,
-      date,
-      email,
+      fields,
       story,
-      formErrors,
-      dateValid,
-      nameValid,
-      lastnameValid,
-      emailValid,
       styleName,
     } = this.state;
     return (
@@ -103,25 +133,15 @@ class BlankApp extends PureComponent {
         <h1 styleName="title">Заявка на стажировку</h1>
         <div styleName="site">
           <Form
-            lastname={lastname}
-            name={name}
-            date={date}
-            email={email}
+            fields={fields}
             changeInput={this.updateInput}
-            changeTextareaStory={this.changeTextareaStory}
-            formErrors={formErrors}
-            emailValid={emailValid}
-            lastnameValid={lastnameValid}
-            nameValid={nameValid}
-            dateValid={dateValid}
+            changeStory={this.changeStory}
+            isValidFields={this.validateField}
           />
           <div styleName="right">
             <Document
-              name={name}
-              lastname={lastname}
-              date={date}
-              email={email}
               story={story}
+              fields={fields}
             />
           </div>
         </div>
