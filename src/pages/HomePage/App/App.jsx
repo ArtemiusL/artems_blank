@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 
-import Form from './Form';
-import Document from './Document';
+import Form from '_components/BlankApp/Form';
+import Document from '_components/BlankApp/Document';
 
-import styles from './BlankApp.scss';
+import styles from './App.scss';
 
-class BlankApp extends PureComponent {
+class App extends PureComponent {
   state = {
     fields: [
       {
@@ -147,4 +147,4 @@ class BlankApp extends PureComponent {
   }
 }
 
-export default CSSModules(BlankApp, styles);
+export default CSSModules(App, styles);
