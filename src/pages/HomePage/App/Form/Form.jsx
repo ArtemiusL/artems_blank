@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
 
-import FieldForm from './FieldForm';
+import FieldForm from '_components/FieldForm';
 
 import styles from './Form.scss';
 
@@ -10,31 +10,34 @@ const constantFields = [
   {
     id: 1,
     fieldName: 'name',
-    label: 'Введите имя*',
+    label: 'Введите имя',
+    required: true,
   },
   {
     id: 2,
     fieldName: 'lastname',
-    label: 'Введите фамилию*',
+    label: 'Введите фамилию',
+    required: true,
   },
   {
     id: 3,
     fieldName: 'date',
-    label: 'Введите дату рождения*',
+    label: 'Введите дату рождения',
     placeholder: 'ДД.ММ.ГГГГ',
+    required: true,
   },
   {
     id: 4,
     fieldName: 'email',
-    label: 'Введите email*',
+    label: 'Введите email',
+    required: true,
   },
 ];
 
 @CSSModules(styles, { allowMultiple: true })
 class Form extends PureComponent {
   handleChangeStory = (evt) => {
-    const { changeStory } = this.props;
-    changeStory(evt.target.value);
+    this.props.changeStory(evt.target.value);
   };
 
   createFieldForm = () => {

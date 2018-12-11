@@ -6,21 +6,31 @@ import styles from './Document.scss';
 
 @CSSModules(styles, { allowMultiple: true })
 class Document extends PureComponent {
+  getValueField = () => {
+    const { fields } = this.props;
+    const newObject = {};
+    fields.forEach((item) => {
+      newObject[item.name] = item.value;
+    });
+    return newObject;
+  };
+
   render() {
     const {
       story,
-      fields,
     } = this.props;
+
+    const content = this.getValueField();
 
     return (
       <div styleName="root">
         <h2 styleName="title">Ваша заявка</h2>
         <div styleName="blank">
-          Здравствуйте, меня зовут <p styleName="value">{fields[1].value} {fields[0].value}</p><br />
+          Здравствуйте, меня зовут <p styleName="value">{content.lastname} {content.name}</p><br />
           Хочу пройти у вас стажировку! <br />
-          Дата рождения <p styleName="value">{fields[2].value}</p> <br />
-          Мой email: <p styleName="value">{fields[3].value}</p> <br />
-          О себе: <p styleName="longValue">{story.value}</p> <br />
+          Дата рождения <p styleName="value">{content.date}</p> <br />
+          Мой email: <p styleName="value">{content.email}</p> <br />
+          О себе: <p styleName="longValue">{story}</p> <br />
         </div>
       </div>
     );
@@ -29,7 +39,7 @@ class Document extends PureComponent {
 
 Document.propTypes = {
   fields: PropTypes.array,
-  story: PropTypes.object,
+  story: PropTypes.string,
 };
 
 export default Document;

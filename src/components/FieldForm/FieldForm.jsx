@@ -9,6 +9,14 @@ import styles from './FieldForm.scss';
 
 @CSSModules(styles, { allowMultiple: true })
 class FieldForm extends PureComponent {
+  createFieldError = () => {
+    const { error } = this.props;
+    if (error) {
+      return (<FieldFormError error={error} />
+      );
+    }
+    return false;
+  }
   render() {
     const {
       data,
@@ -16,16 +24,17 @@ class FieldForm extends PureComponent {
       id,
       fieldName,
       label,
-      error,
+      required,
       handleChangeInput,
       handleCkeckValidate,
     } = this.props;
 
+    const hasError = this.createFieldError();
     return (
       <div styleName="root">
-        <label styleName="description" htmlFor={fieldName}>{label}<br />
+        <label styleName="description" htmlFor={fieldName}>{label}{required && '*'}<br />
           <input
-            styleName={classnames('input')}
+            styleName={classnames('input', { hasError })}
             id={id}
             type="text"
             required
@@ -36,9 +45,7 @@ class FieldForm extends PureComponent {
             onBlur={handleCkeckValidate}
           />
         </label>
-        <FieldFormError
-          error={error}
-        />
+        {hasError}
       </div>
     );
   }
@@ -53,6 +60,7 @@ FieldForm.propTypes = {
   error: PropTypes.string,
   handleChangeInput: PropTypes.func,
   handleCkeckValidate: PropTypes.func,
+  required: PropTypes.bool,
 };
 
 export default FieldForm;

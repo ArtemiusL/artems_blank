@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 
-import Form from '_components/BlankApp/Form';
-import Document from '_components/BlankApp/Document';
+import Form from './Form';
+import Document from './Document';
 
 import styles from './App.scss';
 
@@ -30,15 +30,12 @@ class App extends PureComponent {
         error: '',
       },
     ],
-    story: {
-      value: '',
-    },
+    story: '',
   };
 
   changeStory = (value) => {
-    const { story } = this.state;
     this.setState({
-      story: { ...story, value },
+      story: value,
     });
   }
 
@@ -67,46 +64,49 @@ class App extends PureComponent {
   validateField = (fieldName, value) => {
     switch (fieldName) {
       case 'name':
-        this.isEmptyField(fieldName, value);
+        this.handleChangeFieldErr(fieldName, this.isEmptyField(value));
         break;
       case 'lastname':
-        this.isEmptyField(fieldName, value);
+        this.handleChangeFieldErr(fieldName, this.isEmptyField(value));
         break;
       case 'date':
-        this.isDateValid(fieldName, value);
+        this.handleChangeFieldErr(fieldName, this.isDateValid(value));
         break;
       case 'email':
-        this.isEmailValid(fieldName, value);
+        this.handleChangeFieldErr(fieldName, this.isEmailValid(value));
         break;
       default:
         break;
     }
   }
 
-  isEmptyField = (fieldName, value) => {
-    this.handleChangeFieldErr(fieldName, value, (value.trim().length === 0) ? 'Поле должно быть заполнено!' : '');
+  isEmptyField = (value) => {
+    if (value.trim().length === 0) {
+      return 'Поле должно быть заполнено!';
+    }
+    return '';
   }
 
-  isDateValid = (fieldName, value) => {
-    this.handleChangeFieldErr(
-      fieldName,
-      value,
-      (!/([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})$/.test(value.trim())) ? 'Дата введена неверно. Введите дату в формате ДД.ММ.ГГГГ!' : '');
+  isDateValid = (value) => {
+    if (!/([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})$/.test(value.trim())) {
+      return 'Дата введена неверно. Введите дату в формате ДД.ММ.ГГГГ!';
+    }
+    return '';
   }
 
-  isEmailValid = (fieldName, value) => {
-    this.handleChangeFieldErr(
-      fieldName,
-      value,
-      (!(/([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value.trim())) ? 'Неправильный формат еmail' : '');
+  isEmailValid = (value) => {
+    if (!(/([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value.trim())) {
+      return 'Неправильный формат еmail';
+    }
+    return '';
   }
 
-  handleChangeFieldErr = (fieldName, value, textErr) => {
+  handleChangeFieldErr = (fieldName, textErr) => {
     const { fields } = this.state;
     const getNewState = () => (
       fields.map((item) => {
         if (item.name === fieldName) {
-          const newItem = { ...item, value, error: textErr };
+          const newItem = { ...item, error: textErr };
           return newItem;
         }
         return item;

@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules';
 
 import App from './App';
 
-import styles from '_styles/style.scss';
+import styles from './HomePage.scss';
 
 const HomePage = () => (
   <Fragment>
