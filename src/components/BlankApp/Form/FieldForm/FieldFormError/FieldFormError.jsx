@@ -9,6 +9,7 @@ class FieldFormError extends PureComponent {
     const {
       error,
     } = this.props;
+
     return (
       <div styleName="root">
         {error}

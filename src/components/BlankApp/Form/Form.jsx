@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
 
-import styles from './Form.scss';
 import FieldForm from './FieldForm';
+
+import styles from './Form.scss';
 
 const constantFields = [
   {
@@ -20,6 +21,7 @@ const constantFields = [
     id: 3,
     fieldName: 'date',
     label: 'Введите дату рождения*',
+    placeholder: 'ДД.ММ.ГГГГ',
   },
   {
     id: 4,
@@ -37,23 +39,25 @@ class Form extends PureComponent {
 
   createFieldForm = () => {
     const {
-      changeInput,
       fields,
-      isValidFields,
-      hasError,
+      placeholder,
+      changeInput,
+      checkValidate,
     } = this.props;
+
     return constantFields.map((item) => {
       const { fieldName } = item;
       const currentFields = fields.filter(field => field.name === fieldName);
+
       return (
         <FieldForm
           key={item.id}
           id={item.id}
+          placeholder={placeholder}
           handleChangeInput={changeInput}
+          handleCkeckValidate={checkValidate}
           data={currentFields[0].value}
           error={currentFields[0].error}
-          isValidFields={isValidFields}
-          hasError={hasError}
           {...item}
         />
       );
@@ -62,6 +66,7 @@ class Form extends PureComponent {
 
   render() {
     const fieldsForm = this.createFieldForm();
+
     return (
       <div styleName="root">
         <form styleName="form">
@@ -89,11 +94,11 @@ class Form extends PureComponent {
 }
 
 Form.propTypes = {
-  fields: PropTypes.object,
+  fields: PropTypes.array,
+  placeholder: PropTypes.string,
   changeInput: PropTypes.func,
+  checkValidate: PropTypes.func,
   changeStory: PropTypes.func,
-  hasError: PropTypes.bool,
-  isValidFields: PropTypes.func,
 };
 
 export default Form;

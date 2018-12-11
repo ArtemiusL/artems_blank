@@ -11,6 +11,7 @@ class Document extends PureComponent {
       story,
       fields,
     } = this.props;
+
     return (
       <div styleName="root">
         <h2 styleName="title">Ваша заявка</h2>
@@ -27,7 +28,7 @@ class Document extends PureComponent {
 }
 
 Document.propTypes = {
-  fields: PropTypes.object,
+  fields: PropTypes.array,
   story: PropTypes.object,
 };
 
