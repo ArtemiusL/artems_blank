@@ -1,0 +1,37 @@
+@import '~styles/variables';
+
+.root {
+  padding: 15px;
+  background-color: $color-dark-cyan;
+  color: $color-white;
+}
+
+.title {
+  font-size: 23px;
+  margin-bottom: 30px;
+}
+
+.blank {
+  width: 100%;
+  font-size: 20px;
+}
+
+.value {
+  border-bottom: 1px solid $color-sapphire;
+  display: inline;
+  width: 250px;
+  font-size: 21px;
+  line-height: 14px;
+  min-height: 21px;
+  word-wrap: break-word;
+}
+
+.longValue {
+  border-bottom: 1px solid $color-sapphire;
+  display: inline;
+  width: 100%;
+  font-size: 21px;
+  line-height: 14px;
+  min-height: 21px;
+  word-wrap: break-word;
+}

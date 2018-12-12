@@ -1,0 +1,23 @@
+@import '~styles/variables';
+
+.root {
+  padding: 0 15px;
+}
+
+.site {
+  display: flex;
+}
+
+.title {
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 300;
+  font-size: 35px;
+  color: $color-white;
+}
+
+.right {
+  width: 47.5%;
+  height: 100%;
+  background-color: $color-white;
+}

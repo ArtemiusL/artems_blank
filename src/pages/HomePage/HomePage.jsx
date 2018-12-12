@@ -1,13 +1,16 @@
 import React, { Fragment } from 'react';
 import Helmet from 'react-helmet';
+import CSSModules from 'react-css-modules';
 
-import Users from './Users';
+import App from './App';
+
+import styles from './HomePage.scss';
 
 const HomePage = () => (
   <Fragment>
     <Helmet title="Home" />
-    <Users />
+    <App styleName="container" />
   </Fragment>
 );
 
-export default HomePage;
+export default CSSModules(HomePage, styles);
