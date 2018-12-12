@@ -50,10 +50,11 @@ class Form extends PureComponent {
 
     return constantFields.map((item) => {
       const { fieldName } = item;
-      const currentFields = fields.map(field => field.name).indexOf(fieldName);
-      if (currentFields === -1) {
+      const currentFieldIndex = fields.map(field => field.name).indexOf(fieldName);
+      if (currentFieldIndex === -1) {
         return null;
       }
+      const currentField = fields[currentFieldIndex];
 
       return (
         <FieldForm
@@ -62,8 +63,8 @@ class Form extends PureComponent {
           placeholder={placeholder}
           handleChangeInput={changeInput}
           handleCkeckValidate={checkValidate}
-          error={fields[currentFields].error}
-          data={fields[currentFields].value}
+          error={currentField.error}
+          data={currentField.value}
           {...item}
         />
       );
