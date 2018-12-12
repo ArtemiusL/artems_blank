@@ -78,26 +78,13 @@ class App extends PureComponent {
     }
   }
 
-  isEmptyField = (value) => {
-    if (value.trim().length === 0) {
-      return 'Поле должно быть заполнено!';
-    }
-    return '';
-  }
+  isEmptyField = value => (value.trim().length === 0 ? 'Поле должно быть заполнено!' : '');
 
-  isDateValid = (value) => {
-    if (!/([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})$/.test(value.trim())) {
-      return 'Дата введена неверно. Введите дату в формате ДД.ММ.ГГГГ!';
-    }
-    return '';
-  }
+  isDateValid = value => (!(/([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})$/).test(value.trim()) ?
+    'Дата введена неверно. Введите дату в формате ДД.ММ.ГГГГ!' : '');
 
-  isEmailValid = (value) => {
-    if (!(/([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value.trim())) {
-      return 'Неправильный формат еmail';
-    }
-    return '';
-  }
+  isEmailValid = value => (!(/([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i).test(value.trim()) ?
+    'Неправильный формат еmail' : '');
 
   handleChangeFieldErr = (fieldName, textErr) => {
     const { fields } = this.state;
