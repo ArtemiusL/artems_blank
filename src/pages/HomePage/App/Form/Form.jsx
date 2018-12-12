@@ -50,7 +50,10 @@ class Form extends PureComponent {
 
     return constantFields.map((item) => {
       const { fieldName } = item;
-      const currentFields = fields.filter(field => field.name === fieldName);
+      const currentFields = fields.map(field => field.name).indexOf(fieldName);
+      if (currentFields === -1) {
+        return null;
+      }
 
       return (
         <FieldForm
@@ -59,8 +62,8 @@ class Form extends PureComponent {
           placeholder={placeholder}
           handleChangeInput={changeInput}
           handleCkeckValidate={checkValidate}
-          data={currentFields[0].value}
-          error={currentFields[0].error}
+          error={fields[currentFields].error}
+          data={fields[currentFields].value}
           {...item}
         />
       );

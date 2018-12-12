@@ -2,10 +2,10 @@ import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
 
-import styles from './Document.scss';
+import styles from './Blank.scss';
 
 @CSSModules(styles, { allowMultiple: true })
-class Document extends PureComponent {
+class Blank extends PureComponent {
   getValueField = () => {
     const { fields } = this.props;
     const newObject = {};
@@ -37,9 +37,9 @@ class Document extends PureComponent {
   }
 }
 
-Document.propTypes = {
+Blank.propTypes = {
   fields: PropTypes.array,
   story: PropTypes.string,
 };
 
-export default Document;
+export default Blank;

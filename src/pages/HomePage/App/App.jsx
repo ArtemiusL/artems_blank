@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import CSSModules from 'react-css-modules';
 
 import Form from './Form';
-import Document from './Document';
+import Blank from './Blank';
 
 import styles from './App.scss';
 
@@ -64,8 +64,6 @@ class App extends PureComponent {
   validateField = (fieldName, value) => {
     switch (fieldName) {
       case 'name':
-        this.handleChangeFieldErr(fieldName, this.isEmptyField(value));
-        break;
       case 'lastname':
         this.handleChangeFieldErr(fieldName, this.isEmptyField(value));
         break;
@@ -136,7 +134,7 @@ class App extends PureComponent {
             checkValidate={this.checkValidate}
           />
           <div styleName="right">
-            <Document
+            <Blank
               story={story}
               fields={fields}
             />
